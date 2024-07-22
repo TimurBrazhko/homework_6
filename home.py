@@ -51,18 +51,47 @@ class Bank:
         print(f"Total funds in the bank: {total}")
         return total
 
-# Создаем счета
-checking = CheckingAccount("CA54321", "Bob", 500, 200)
 
-# Создаем банк и добавляем счета
-bank = Bank("MyBank")
-bank.add_account(checking)
+class SavingsAccount(BankAccount):
+    def __init__(self, account_number, owner, interest_rate=0, balance=0):
+        super().__init__(account_number, owner, balance)
+        self.interest_rate = interest_rate
 
-# Действия с счетами
+    def add_interest(self, interest):
+        self.interest_rate = self.balance // 100 * interest
+        self.balance = self.balance + self.interest_rate
+        print(f'{self.interest_rate} - interest rate mf\n{self.balance} - new balance mf')
 
-checking.withdraw(600)
-checking.deposit(300)
 
-# Выводим список счетов и общую сумму денег в банке
-bank.list_accounts()
-bank.total_funds()
+# # Создаем счета
+# checking = CheckingAccount("CA54321", "Bob", 500, 200)
+#
+# # Создаем банк и добавляем счета
+# bank = Bank("MyBank")
+# bank.add_account(checking)
+#
+# # Действия с счетами
+#
+# checking.withdraw(600)
+# checking.deposit(300)
+#
+# # Выводим список счетов и общую сумму денег в банке
+# bank.list_accounts()
+# bank.total_funds()
+
+# экземпляр
+c1 = SavingsAccount("VVS617", "Timur", interest_rate=0, balance=600)
+
+# создаем еще один счет
+
+bank1 = Bank("MyBank")
+bank1.add_account(c1)
+
+# действия со счетом
+
+c1.withdraw(400)
+c1.deposit(200)
+c1.add_interest(50)
+
+bank1.list_accounts()
+bank1.total_funds()
